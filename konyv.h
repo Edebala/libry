@@ -1,8 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
 typedef struct{
 	int year;
 	int month;
 	int day;
 }Date;
+
+int compareDate(Date* a,Date* b);
+int compareString(char* a,char* b);
+int compareInt(int* a,int* b);
 
 typedef struct{
 ///The title of the book, ex. Winetou
@@ -10,7 +19,7 @@ typedef struct{
 ///The author of the book ex. Karl May
 	char* author;
 ///The publisher, that published the book. ex. Kriterion
-	char* publisher;
+	char* language;
 ///The "type" of the book, ex. Fantasy, SciFi etc.
 	char* genre;
 ///The time of publication of the book
@@ -27,3 +36,13 @@ Book *createBook
 (char*,char*,char*,char*,Date*,int,int,Date*);
 
 void showBook(Book*);
+void setDate(Date* date,int y,int m,int d);
+void loadBooksFromFile(Book** books,char* filename);
+void listBooks(Book* books);
+void sortBooksByTitle();
+void sortBooksByAuthor();
+void sortBooksByGenre();
+void sortBooksByPublicationDate();
+void sortBooksByCondition();
+
+void borrowBook(Book* books, int id);

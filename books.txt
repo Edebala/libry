@@ -1,0 +1,13 @@
+8
+Tale of Two Cities,Charles Dickens,English,Historical Fiction,1994-1-1,2,0,NEW
+Metamorphosis,Franz Kafka,English,Psichological Fiction,2005-8-17,4,3,2019-11-23,NEW
+The Wonderful Wizard of Oz,L.Frank Baum,English,Juvenile Fiction,1993-2-1,2,0,USED
+The Great Gatsby,Fitzgerald. F. Scott,English,Psychological Fiction,2021-1-17,1,0,WEATHERED
+Pride and Prejudice,Jane Austen,English,Fiction,1998-6-1,2,0,NEW
+Great Expectatins,Charles Dickens,English,Fiction,1998-6-1,2,0,NEW
+A Keplet,Barabasi Albert Laszlo,Hungarian,Self Improvement,2018-1-1,2,1,2021-1-12,USED
+Adventures of Huckleberry Finn,English,Fiction,2004-6-29,3,0,NEW
+
+%Title,Author,Language,Genre,ReleaseDate,BorrowPeriod,TimesBorrowed,(LastBorrowed),Condition
+
+

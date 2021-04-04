@@ -21,8 +21,8 @@ ValueSet:
 	e.Genre
 	f.Publication Date
 	g.Borrowing Period
-	h.Last Time Borrowed
-	i.Times Borrowed
+	h.Times Borrowed
+	i.Last Time Borrowed
 	j.Condition
 
 2.Borrows

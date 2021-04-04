@@ -1,55 +1,75 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "konyv.h"
 
-Book *createBook
-(char* title, char* author, char* publisher,
-char* genre, Date *pDate, int timesBorrowed,
-int bPeriod, Date *lastBorrowed)
-{
-	Book *b = (Book*) malloc(sizeof(Book));
-	b->title = (char*) malloc(strlen(title));
-	strcpy(b->title,title);
-	
-	b->author = (char*) malloc(strlen(author));
-	strcpy(b->author,author);
-	
-	b->publisher = (char*) malloc(strlen(publisher));
-	strcpy(b->publisher,publisher);
+char* intToString(int a){
+	int size = 1 +  (int) log10((double)a);
+	char* c = (char*) calloc(size+1,sizeof(char));
+	for(int i=size;i>=0;i--){
+		c[i-1] = a%10 + '0';
+		a/=10;
+	}
+	c[size] = 0;
+	return c;
+}
 
+char* dateToString(Date *a){
+	char *s = (char*) malloc(16);
+	strcpy(s,intToString(a->year));
+	strcat(s,"-");
+	strcat(s,intToString(a->month));
+	strcat(s,"-");
+	strcat(s,intToString(a->day));
+	return s;
+}
+
+void setDate(Date* date,int y,int m,int d){
+	date->year = y;	
+	date->month = m;	
+	date->day = d;	
+}
+
+Book *createBook
+(char* title, char* author, char* language,char* genre,
+Date *pDate, int timesBorrowed,int bPeriod, Date *lastB){
+	Book *b = (Book*) malloc(sizeof(Book));
+
+	b->title = (char*) malloc(strlen(title));
+	b->author = (char*) malloc(strlen(author));
+	b->language = (char*) malloc(strlen(language));
 	b->genre = (char*) malloc(strlen(genre));
+	
+	strcpy(b->title,title);
+	strcpy(b->author,author);
+	strcpy(b->language,language);
 	strcpy(b->genre,genre);	
 
-	b->publicationDate.year = pDate->year;
-	b->publicationDate.month = pDate->month;
-	b->publicationDate.day = pDate->day;
+	setDate(&(b->publicationDate),pDate->year,
+		pDate->month,pDate->day);
 
 	b->timesBorrowed=timesBorrowed;
 	b->borrowingPeriod=bPeriod;
-	b->lastBorrowed = (Date*) malloc(sizeof(Date));
-	if(lastBorrowed != 0)
-	{	
-		b->lastBorrowed->year = lastBorrowed->year;
-		b->lastBorrowed->month = lastBorrowed->month;
-		b->lastBorrowed->day = lastBorrowed->day;
+
+	if(timesBorrowed != 0){
+		b->lastBorrowed = (Date*) malloc(sizeof(Date));
+		setDate(&(b->publicationDate),lastB->year,
+			lastB->month,lastB->day);
 	}
 }
 
 void showBook(Book* b){
-	printf
-	("Title:\t%s\nAuthor:\t%s\nPublisher:\t%s\nGenre:\t%s\n
-		PublicationDate:\t%4.0i,%2.0i,%2.0i\nTimes Borrowed:\t%i\nBorrowing Period:\t%i\n",
-		b->title,b->author,b->publisher,b->genre,
-		b->publicationDate.year,b->publicationDate.month,b->publicationDate.day,
-		b->timesBorrowed,b->borrowingPeriod
+	char* pDate = dateToString(&(b->publicationDate));
+	char* lastB;
+	if(b->timesBorrowed != 0)
+		lastB = dateToString(b->lastBorrowed);
+	printf("Title:             %s\nAuthor:            %s\nLanguage:          %s\nGenre:             %s\nPublicationDate:   %s\nBorrowing Period:  %i months\n",
+		b->title,b->author,b->language,b->genre,pDate,b->borrowingPeriod
 	);
-	
-	if(b->lastBorrowed != 0)
-		printf
-			("Last Time Borrowed:%4.0i,%2.0i,%2.0i",
-				b->lastBorrowed->year,b->lastBorrowed->month,b->lastBorrowed->day
-			);	
+
+	if(b->timesBorrowed != 0)
+		printf("Times Borrowed:%i\nLast Time Borrowed:%s",b->timesBorrowed,lastB);	
 	else
 		printf("Has not been Borrowed Yet!\n");
+
+	free(pDate);
+	if(b->timesBorrowed != 0)
+		free(lastB);
 }
