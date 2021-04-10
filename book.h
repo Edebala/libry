@@ -32,13 +32,18 @@ typedef struct{
 	Date *lastBorrowed;
 }Book;
 
+typedef struct{
+	int numBooks;
+	Book* Books;
+}Library;
+
 Book *createBook
 (char*,char*,char*,char*,Date*,int,int,Date*);
 
 void showBook(Book*);
 void setDate(Date* date,int y,int m,int d);
-void loadBooksFromFile(Book** books,char* filename);
-void listBooks(Book* books);
+void loadBooksFromFile(Library* library,char* filename);
+void listBooks(Library *library);
 void sortBooksByTitle();
 void sortBooksByAuthor();
 void sortBooksByGenre();
