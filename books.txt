@@ -6,7 +6,7 @@ The Great Gatsby,Fitzgerald. F. Scott,English,Psychological Fiction,2021-1-17,1,
 Pride and Prejudice,Jane Austen,English,Fiction,1998-6-1,2,0,NEW
 Great Expectatins,Charles Dickens,English,Fiction,1998-6-1,2,0,NEW
 A Keplet,Barabasi Albert Laszlo,Hungarian,Self Improvement,2018-1-1,2,1,2021-1-12,USED
-Adventures of Huckleberry Finn,English,Fiction,2004-6-29,3,0,NEW
+Adventures of Huckleberry Finn,Mark Twain,English,Fiction,2004-6-29,3,0,NEW
 
 %Title,Author,Language,Genre,ReleaseDate,BorrowPeriod,TimesBorrowed,(LastBorrowed),Condition
 

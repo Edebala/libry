@@ -30,15 +30,17 @@ typedef struct{
 	int borrowingPeriod;
 ///The last time someone borrowed the book
 	Date *lastBorrowed;
+///The Condition of the book
+	char* condition;
 }Book;
 
 typedef struct{
 	int numBooks;
-	Book* Books;
+	Book** Books;
 }Library;
 
 Book *createBook
-(char*,char*,char*,char*,Date*,int,int,Date*);
+(char*,char*,char*,char*,Date*,int,int,Date*,char*);
 
 void showBook(Book*);
 void setDate(Date* date,int y,int m,int d);
