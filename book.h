@@ -1,3 +1,6 @@
+#ifndef BOOK_H 
+#define BOOK_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,9 +12,7 @@ typedef struct{
 	int day;
 }Date;
 
-int compareDate(Date* a,Date* b);
-int compareString(char* a,char* b);
-int compareInt(int* a,int* b);
+#include "functions.h"
 
 typedef struct{
 	char* title;///The title of the book, ex. Winetou
@@ -38,10 +39,6 @@ void setDate(Date* date,int y,int m,int d);
 void loadBooksFromFile(Library* library,char* filename);
 void listBooks(Library *library);
 
-void sortBooksByTitle();
-void sortBooksByAuthor();
-void sortBooksByGenre();
-void sortBooksByPublicationDate();
-void sortBooksByCondition();
+void borrowBook(Book* books, int id,Date* date);
 
-void borrowBook(Book* books, int id);
+#endif
