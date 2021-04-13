@@ -1,47 +1,45 @@
 #include "functions.h"
+#include "book.h"
 
-int compareString(void *a, void *b){
-	char *sa = (char*) a;
-	char *sb = (char*) b;
-	return strcmp(a,b);
-}
-
-int compareDate(void* da,void* db)
-{
-	Date* a = (Date*) da;
-	Date* b = (Date*) db;
+int compareDate(Date* a,Date* b){
 	return (a->year==b->year?(a->month==b->month?(a->day==b->day?0:
 			a->day-b->day):a->month-b->month):a->year-b->year);
-
-	/*if( a -> year > b a-> year)
-		return 1;
-	if ( a -> year < b -> year)
-		return -1;
-	if (a -> year == b -> year)
-	{
-		if( a -> month > b -> month)
-			return 1;
-		if (a ->month < b-> month)
-			return -1;
-		if (a -> month == b -> month)
-		{
-		if (a -> day > b -> day)
-			return 1;
-		if( a -> day < b -> day)
-			return -1;
-		if (a -> day == b -> day)
-			return 0;
-		}
-	}*/
 }
 
-int compareInt(void* a,void* b){
-	//return(*((int*)a)-*((int*)b));
-    int *ia =(int *) a;
-    int *ib =(int *) b;
-if(*ia > *ib) return 1;
-if(*ia < *ib) return -1;
-if(*ia == *ib )return 0;
+int compareInt(const void* a,const void* b){
+	return(*((int*)a)-*((int*)b));
+}
+
+int compareByPublicationDate(const void*a,const void*b){
+	return compareDate(
+		&((*(Book**)a)->publicationDate),&((*(Book**)b)->publicationDate));
+}
+
+int compareByTitle(const void*a,const void*b){
+	return strcmp((*(Book**)a)->title,(*(Book**)b)->title);
+}
+int compareByAuthor(const void*a,const void*b){
+	return strcmp((*(Book**)a)->author,(*(Book**)b)->author);
+}
+int compareByLanguage(const void*a,const void*b){
+	return strcmp((*(Book**)a)->language,(*(Book**)b)->language);
+}
+int compareByGenre(const void*a,const void*b){
+	return strcmp((*(Book**)a)->genre,(*(Book**)b)->genre);
+}
+int compareByCondition(const void*a,const void*b){
+	return strcmp((*(Book**)a)->condition,(*(Book**)b)->condition);
+}
+void sortBooks(Library *lib,int c){
+
+	switch(c){
+		case 0:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByTitle);return;
+		case 1:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByAuthor);return;
+		case 2:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByLanguage);return;
+		case 3:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByGenre);return;
+		case 4:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByPublicationDate);return;
+		case 5:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByCondition);return;
+	}
 }
 
 char* copyString(char* string){

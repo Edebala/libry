@@ -12,24 +12,24 @@ typedef struct{
 	int day;
 }Date;
 
-#include "functions.h"
-
 typedef struct{
-	char* title;///The title of the book, ex. Winetou
-	char* author;///The author of the book ex. Karl May
-	char* language;///The publisher, that published the book. ex. Kriterion
-	char* genre;///The "type" of the book, ex. Fantasy, SciFi etc.
+	char* title;///ex. Winetou
+	char* author;///ex. Karl May
+	char* language;///ex. English
+	char* genre;///ex. Fantasy, SciFi etc.
 	Date publicationDate;///The time of publication of the book
 	int timesBorrowed;///How many times has the book been borrowed
-	int borrowingPeriod;///For how long can the book be borrowed, in months
+	int borrowingPeriod;///For how many months can it be borrowed
 	Date *lastBorrowed;///The last time someone borrowed the book
-	char* condition;///The Condition of the book
+	char* condition;
 }Book;
 
 typedef struct{
 	int numBooks;
 	Book** Books;
 }Library;
+
+#include "functions.h"
 
 Book *createBook
 (char*,char*,char*,char*,Date*,int,int,Date*,char*);

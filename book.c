@@ -30,31 +30,17 @@ Book *createBook
 }
 
 void showBook(Book* b){
-	char *lastB, *pDate = dateToString(&(b->publicationDate)),
-		**s = (char**) malloc(10*sizeof(char*));
-
-	s[0]="Title:";s[1]="Author:";s[2]="Language:";s[3]="Genre:";
-	s[4] = "Pub. Date:"; s[5] = "Borr.Period:"; s[6]=" months";
-	s[7] = "Times Borr.:"; s[8] = "Last Borrow:"; s[9]="Condition:";
-
-	if(b->timesBorrowed != 0)
-		lastB = dateToString(b->lastBorrowed);
-
-
-	printf("%12s%s\n%12s%s\n%12s%s\n%12s%s\n%12s%s\n%12s%i%s\n",
-		s[0],b->title,s[1],b->author,s[2],b->language,s[3],b->genre,s[4],pDate,
-		s[5],b->borrowingPeriod,s[6]);
-
-	if(b->timesBorrowed)
-		printf("%12s%i\n%12s%s\n",
-		s[7],b->timesBorrowed,s[8],lastB);
-	else
-		printf("Has not been Borrowed Yet!\n");
-	printf("%12s%s\n\n",s[9],b->condition);
-	free(pDate);
-	if(b->timesBorrowed != 0)
+	char *pDate = dateToString(&(b->publicationDate));
+	printf("%36s\t%25s\t%12s\t%25s\t%12s\t%7i months\t%18s\t",
+		b->title,b->author,b->language,
+		b->genre,pDate,b->borrowingPeriod,b->condition);
+	if(b->timesBorrowed != 0){
+		char* lastB = dateToString(b->lastBorrowed);
+		printf("%i\t%s\n",b->timesBorrowed,lastB);
 		free(lastB);
-	free(s);
+	}
+	else printf("Has not been Borrowed Yet!\n");
+	free(pDate);
 }
 
 void loadBooksFromFile(Library* library ,char* source){
@@ -62,7 +48,7 @@ void loadBooksFromFile(Library* library ,char* source){
 	fscanf(f,"%d\n",&(library->numBooks));
 	library -> Books = (Book**) malloc(library -> numBooks*sizeof(Book*));
 	for(int i=0;i<library->numBooks;i++){
-		char title[30], author[30],language[30], genre[30], condition[30];
+		char title[64],author[64],language[64],genre[64],condition[64];
 		int timesBorrowed,borrowingPeriod,year,month,day;
 		Date pubDate, lastBorrowed;
 		fscanf(f,"%[^,],%[^,],%[^,],%[^,],%d-%d-%d,%d,%d,",
@@ -70,12 +56,13 @@ void loadBooksFromFile(Library* library ,char* source){
 			&(pubDate.year),&(pubDate.month),&(pubDate.day),
 			&borrowingPeriod,&timesBorrowed);
 		if(timesBorrowed){
-			fscanf(f,"%d-%d-%d,",
-				&(lastBorrowed.year),&(lastBorrowed.month),&(lastBorrowed.day));
+			fscanf(f,"%d-%d-%d,",&(lastBorrowed.year),
+			&(lastBorrowed.month),&(lastBorrowed.day));
 		}
 		fscanf(f,"%[^\n]\n",condition);
-		library->Books[i] = createBook(title,author,language,genre,
-			&pubDate,borrowingPeriod,timesBorrowed,&lastBorrowed,condition);
+		library->Books[i] = createBook(title,author,language,
+		genre,&pubDate,borrowingPeriod,
+		timesBorrowed,&lastBorrowed,condition);
 	}
 	fclose(f);
 }
@@ -83,6 +70,13 @@ void loadBooksFromFile(Library* library ,char* source){
 void listBooks
 	(Library* lib)
 {
+	char **s = (char**) malloc(10*sizeof(char*));
+	s[0]="Title:";s[1]="Author:";s[2]="Language:";s[3]="Genre:";
+	s[4] = "Pub. Date:"; s[5] = "Borrowing Period:";
+	s[6] = "Times Borrowed(Months):"; s[7]="Condition:";
+	printf("%36s\t%25s\t%12s\t%25s\t%12s\t%s\t%s\t%s\n",
+		s[0],s[1],s[2],s[3],s[4],s[5],s[7],s[6]);
 	for(int i=0;i<lib->numBooks;i++)
 		showBook(lib->Books[i]);
+	free(s);
 }

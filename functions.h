@@ -3,15 +3,18 @@
 
 #include "book.h"
 
-int compareDate(void* a,void* b);
-int compareString(void* a,void* b);
-int compareInt(void* a,void* b);
+int compareDate(Date* a,Date* b);
+int compareString(char* a,char* b);
+int compareInt(const void* a,const void* b);
 
-void sortBooksByTitle();
-void sortBooksByAuthor();
-void sortBooksByGenre();
-void sortBooksByPublicationDate();
-void sortBooksByCondition();
+int compareByPublicationDate(const void*,const void*);
+int compareByAuthor(const void*,const void*);
+int compareByLanguage(const void*,const void*);
+int compareByGenre(const void*,const void*);
+int compareByCondition(const void*,const void*);
+int compareByTitle(const void*,const void*);
+
+void sortBooks(Library *lib,int c);
 
 char* copyString(char* string);
 
