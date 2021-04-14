@@ -39,6 +39,4 @@ void setDate(Date* date,int y,int m,int d);
 void loadBooksFromFile(Library* library,char* filename);
 void listBooks(Library *library);
 
-void borrowBook(Book* books, int id,Date* date);
-
 #endif

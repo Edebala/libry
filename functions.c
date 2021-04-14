@@ -10,35 +10,35 @@ int compareInt(const void* a,const void* b){
 	return(*((int*)a)-*((int*)b));
 }
 
-int compareByPublicationDate(const void*a,const void*b){
+int cmpPubDate(const void*a,const void*b){
 	return compareDate(
 		&((*(Book**)a)->publicationDate),&((*(Book**)b)->publicationDate));
 }
 
-int compareByTitle(const void*a,const void*b){
+int cmpTitle(const void*a,const void*b){
 	return strcmp((*(Book**)a)->title,(*(Book**)b)->title);
 }
-int compareByAuthor(const void*a,const void*b){
+int cmpAuthor(const void*a,const void*b){
 	return strcmp((*(Book**)a)->author,(*(Book**)b)->author);
 }
-int compareByLanguage(const void*a,const void*b){
+int cmpLanguage(const void*a,const void*b){
 	return strcmp((*(Book**)a)->language,(*(Book**)b)->language);
 }
-int compareByGenre(const void*a,const void*b){
+int cmpGenre(const void*a,const void*b){
 	return strcmp((*(Book**)a)->genre,(*(Book**)b)->genre);
 }
-int compareByCondition(const void*a,const void*b){
+int cmpCondition(const void*a,const void*b){
 	return strcmp((*(Book**)a)->condition,(*(Book**)b)->condition);
 }
-void sortBooks(Library *lib,int c){
 
+void sortBooks(Library *lib,int c){
 	switch(c){
-		case 0:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByTitle);return;
-		case 1:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByAuthor);return;
-		case 2:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByLanguage);return;
-		case 3:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByGenre);return;
-		case 4:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByPublicationDate);return;
-		case 5:qsort(lib->Books,lib->numBooks,sizeof(Book*),compareByCondition);return;
+		case 0:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpTitle);break;
+		case 1:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpAuthor);break;
+		case 2:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpLanguage);break;
+		case 3:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpGenre);break;
+		case 4:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpPubDate);break;
+		case 5:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpCondition);break;
 	}
 }
 

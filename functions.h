@@ -7,12 +7,12 @@ int compareDate(Date* a,Date* b);
 int compareString(char* a,char* b);
 int compareInt(const void* a,const void* b);
 
-int compareByPublicationDate(const void*,const void*);
-int compareByAuthor(const void*,const void*);
-int compareByLanguage(const void*,const void*);
-int compareByGenre(const void*,const void*);
-int compareByCondition(const void*,const void*);
-int compareByTitle(const void*,const void*);
+int cmpPubDate(const void*,const void*);
+int cmpAuthor(const void*,const void*);
+int cmpLanguage(const void*,const void*);
+int cmpGenre(const void*,const void*);
+int cmpCondition(const void*,const void*);
+int cmpTitle(const void*,const void*);
 
 void sortBooks(Library *lib,int c);
 
