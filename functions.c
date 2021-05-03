@@ -9,12 +9,10 @@ int compareDate(Date* a,Date* b){
 int compareInt(const void* a,const void* b){
 	return(*((int*)a)-*((int*)b));
 }
-
 int cmpPubDate(const void*a,const void*b){
 	return compareDate(
 		&((*(Book**)a)->publicationDate),&((*(Book**)b)->publicationDate));
 }
-
 int cmpTitle(const void*a,const void*b){
 	return strcmp((*(Book**)a)->title,(*(Book**)b)->title);
 }
@@ -32,14 +30,10 @@ int cmpCondition(const void*a,const void*b){
 }
 
 void sortBooks(Library *lib,int c){
-	switch(c){
-		case 0:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpTitle);break;
-		case 1:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpAuthor);break;
-		case 2:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpLanguage);break;
-		case 3:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpGenre);break;
-		case 4:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpPubDate);break;
-		case 5:qsort(lib->Books,lib->numBooks,sizeof(Book*),cmpCondition);break;
-	}
+	int (*a[6])(const void*,const void*) = {
+		cmpTitle, cmpAuthor, cmpLanguage,
+		cmpGenre, cmpPubDate, cmpCondition};
+	qsort(lib->Books,lib->nr,sizeof(Book*),a[c]);
 }
 
 char* copyString(char* string){

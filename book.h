@@ -22,21 +22,24 @@ typedef struct{
 	int borrowingPeriod;///For how many months can it be borrowed
 	Date *lastBorrowed;///The last time someone borrowed the book
 	char* condition;
+	int available;
 }Book;
 
 typedef struct{
-	int numBooks;
+	int nr;
 	Book** Books;
 }Library;
 
 #include "functions.h"
 
 Book *createBook
-(char*,char*,char*,char*,Date*,int,int,Date*,char*);
+(char*,char*,char*,char*,Date*,int,int,Date*,char*,int);
 
 void showBook(Book*);
 void setDate(Date* date,int y,int m,int d);
 void loadBooksFromFile(Library* library,char* filename);
 void listBooks(Library *library);
-
+void borrowBook(Library* lib, int nr);
+void returnBook(Library* lib, int nr);
+void saveBooks(Library* lib, char* file);
 #endif
